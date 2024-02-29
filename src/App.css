@@ -80,16 +80,30 @@
   font-weight: 400;
   font-size: 14;
   padding: 16px 16px 24px 16px;
+  position: relative;
 }
 
-.characterName:after {
-  content: ;
-  width: 100%;
-  height: 10px;
-  background: color_red;
+.characterName::before {
+  content: "";
+  height: 0;
   position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border-left: 29px solid var(--color_white);
+  border-right: 29px solid var(--color_white);
+}
+
+.characterName::after {
+  content: "";
+  width: 84.6%;
+  height: 0;
   bottom: 0;
   left: 0;
+  position: absolute;
+  background: transparent;
+  border-top: 29px solid var(--color_black);
+  border-right: 29px solid var(--color_white);
 }
 
 .like {

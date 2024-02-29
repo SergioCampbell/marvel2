@@ -2,24 +2,24 @@ import { useLikes } from "../../context/globalStateContext";
 import { HeartIcon } from "../../style/HeartIcon";
 import { UnselectedHeartIcon } from "../../style/UnselectedHeartIcon";
 import { Result } from "../../interfaces/characters.interface";
+import { Outlet } from "react-router-dom";
 
 type SearchResultsProps = {
   searchResults: Result[];
 };
 
 export const Content = ({searchResults}: SearchResultsProps) => {
-	console.log("🚀 ~ Content ~ searchResults:", searchResults);
 	const { likedCards, addLike, removeLike } = useLikes();
 
-	const isCharacterLiked = (characterName: string) => {
-		return likedCards.includes(characterName);
+	const isCharacterLiked = (character: Result) => {
+		return likedCards.includes(character);
 	};
 
-	const handleLikeClick = (characterName: string) => {
-		if (isCharacterLiked(characterName)) {
-			removeLike(characterName);
+	const handleLikeClick = (character: Result) => {
+		if (isCharacterLiked(character)) {
+			removeLike(character);
 		} else {
-			addLike(characterName);
+			addLike(character);
 		}
 	};
 
@@ -48,9 +48,9 @@ export const Content = ({searchResults}: SearchResultsProps) => {
 						</p>
 						<button
 							className="like"
-							onClick={() => handleLikeClick(character.name)}
+							onClick={() => handleLikeClick(character)}
 						>
-							{isCharacterLiked(character.name) ? (
+							{isCharacterLiked(character) ? (
 								<HeartIcon width={12} />
 							) : (
 								<UnselectedHeartIcon width={12} />
@@ -59,6 +59,7 @@ export const Content = ({searchResults}: SearchResultsProps) => {
 					</div>
 				</div>
 			))}
+			<Outlet />
 		</section>
 	);
 };

@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
+import { Result } from "../interfaces/characters.interface";
 import React, { createContext, useContext, useState } from "react";
 
 type LikesContextType = {
-  likedCards: string[];
-  addLike: (cardId: string) => void;
-  removeLike: (cardId: string) => void;
+  likedCards: Result[];
+  addLike: (card: Result) => void;
+  removeLike: (cardId: Result) => void;
 };
 
 interface LikesProviderProps {
@@ -22,14 +23,14 @@ export const useLikes = () => {
 };
 
 export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
-	const [likedCards, setLikedCards] = useState<string[]>([]);
+	const [likedCards, setLikedCards] = useState<Result[]>([]);
 
-	const addLike = (cardId: string) => {
-		setLikedCards((prevLikedCards) => [...prevLikedCards, cardId]);
+	const addLike = (card: Result) => {
+		setLikedCards((prevLikedCards) => [...prevLikedCards, card]);
 	};
 
-	const removeLike = (cardId: string) => {
-		setLikedCards((prevLikedCards) => prevLikedCards.filter((id) => id !== cardId));
+	const removeLike = (card: Result) => {
+		setLikedCards((prevLikedCards) => prevLikedCards.filter((id) => id !== card));
 	};
 
 	return (

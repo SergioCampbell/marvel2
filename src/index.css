@@ -26,3 +26,17 @@
     color: var(--color_white);
     margin: 0;
   }
+
+  .error-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 30px;
+    background: var(--color_red);
+    background: linear-gradient(90deg, var(--color_red) 0%, var(--color_black) 100%);
+    background: -moz-linear-gradient(90deg, var(--color_red) 0%, var(--color_black) 100%);
+    background: -webkit-linear-gradient(90deg, var(--color_red) 0%, var(--color_black) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="var(--color_red)", endColorstr="var(--color_black)", GradientType=1 );
+  }
