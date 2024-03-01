@@ -10,7 +10,9 @@ export default function Navbar({likes}: {likes: number}) {
 				<MarvelLogo />
 			</Link>
 			<div style={{display: "flex", alignItems: "center", gap: 10}}>
-				{likes !== 0 ? (<><HeartIcon /> {likes}</>) : <UnselectedHeartIcon />}
+				<Link to={"/favorites-list"} style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
+					{likes !== 0 ? (<><HeartIcon /> <p style={{marginLeft: 10}}>{likes}</p></>) : <UnselectedHeartIcon />}
+				</Link>
 			</div>
 		</nav>
 	);

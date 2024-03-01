@@ -15,7 +15,7 @@
 }
 
 .section {
-  padding: 0px 48px
+  padding: 0px 48px;
 }
 
 .search {
@@ -76,22 +76,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12;
   font-weight: 400;
-  font-size: 14;
+  font-size: 14px;
   padding: 16px 16px 24px 16px;
   position: relative;
-}
-
-.characterName::before {
-  content: "";
-  height: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-  border-left: 29px solid var(--color_white);
-  border-right: 29px solid var(--color_white);
 }
 
 .characterName::after {
@@ -102,7 +90,7 @@
   left: 0;
   position: absolute;
   background: transparent;
-  border-top: 29px solid var(--color_black);
+  border-top: 29px solid transparent;
   border-right: 29px solid var(--color_white);
 }
 
@@ -110,4 +98,38 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.characterDetail {
+  background: var(--color_black);
+  color: var(--color_white);
+  padding: 0px 48px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+.characterDetail::after {
+  content: "";
+  width: 98%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background: transparent;
+  border-top: 29px solid transparent;
+  border-right: 29px solid var(--color_white);
+}
+
+.characterInfo {
+  display: grid;
+  justify-items: center;
+}
+
+.comicsList {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 0px;
+  gap: 24px;
 }

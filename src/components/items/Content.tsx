@@ -2,13 +2,13 @@ import { useLikes } from "../../context/globalStateContext";
 import { HeartIcon } from "../../style/HeartIcon";
 import { UnselectedHeartIcon } from "../../style/UnselectedHeartIcon";
 import { Result } from "../../interfaces/characters.interface";
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type SearchResultsProps = {
-  searchResults: Result[];
+	searchResults: Result[];
 };
 
-export const Content = ({searchResults}: SearchResultsProps) => {
+export const Content = ({ searchResults }: SearchResultsProps) => {
 	const { likedCards, addLike, removeLike } = useLikes();
 
 	const isCharacterLiked = (character: Result) => {
@@ -35,17 +35,20 @@ export const Content = ({searchResults}: SearchResultsProps) => {
 						className="characterImage"
 					/>
 					<div className="characterName">
-						<p
-							style={{
-								fontSize: 12,
-								fontWeight: 600,
-								textOverflow: "ellipsis",
-								whiteSpace: "nowrap",
-								overflow: "hidden",
-							}}
-						>
-							{character.name}
-						</p>
+						<Link to={`/character-details/${character.id}`}
+							style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
+							<p
+								style={{
+									fontSize: 12,
+									fontWeight: 600,
+									textOverflow: "ellipsis",
+									whiteSpace: "nowrap",
+									overflow: "hidden",
+								}}
+							>
+								{character.name}
+							</p>
+						</Link>
 						<button
 							className="like"
 							onClick={() => handleLikeClick(character)}
@@ -59,7 +62,6 @@ export const Content = ({searchResults}: SearchResultsProps) => {
 					</div>
 				</div>
 			))}
-			<Outlet />
 		</section>
 	);
 };

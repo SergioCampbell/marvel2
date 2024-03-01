@@ -6,8 +6,9 @@ import CharacterList from "./routes/characterList";
 import { useEffect, useState } from "react";
 import { Search } from "./components/navigation/Search";
 import { Result } from "./interfaces/characters.interface";
-import { data } from "./utils/charactersList";
 import FavoriteList from "./routes/favoriteList";
+import CharacterDetails from "./routes/CharacterDetails";
+import getAllCharacters from "./services/getAllCharacters.service";
 
 function App() {
 	const [search, setSearch] = useState<string>("");
@@ -19,20 +20,31 @@ function App() {
 	};
 
 	useEffect(() => {
-		const results = data.data.results.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
-		setSearchResults(results);
+		getAllCharacters().then((data) => {
+			const results = data.filter((item: { name: string }) => item.name.toLowerCase().includes(search.toLowerCase()));
+			setSearchResults(results);
+		});
 	}, [search]);
 
 	return (
 		<main test-id="App">
 			<Navbar likes={likedCards.length} />
-			<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
 			<Routes>
-				<Route path="/" element={<CharacterList searchResults={searchResults} />} />
-				<Route path="/favorites-list" element={<FavoriteList />} />
+				<Route path="*" element={
+					<>
+						<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
+						<CharacterList searchResults={searchResults} />
+					</>
+				} />
+				<Route path="/favorites-list" element={
+					<>
+						<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
+						<FavoriteList />
+					</>
+				} />
 				<Route
-					path="/character-details/:id"
-					element={<Navbar likes={likedCards.length} />}
+					path="/character-details/:characterId"
+					element={<CharacterDetails />}
 				/>
 			</Routes>
 		</main>

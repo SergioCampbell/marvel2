@@ -18,6 +18,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
   },
 }

@@ -16,7 +16,7 @@ export const data: Characters = {
 		"results": [
 			{
 				"id": 1011334,
-				"name": "3-D Man test",
+				"name": "3-D Man testasdasdasdasdas",
 				"description": "",
 				"modified": "2014-04-29T14:18:17-0400",
 				"thumbnail": {
@@ -233,7 +233,7 @@ export const data: Characters = {
 			},
 			{
 				"id": 1017100,
-				"name": "A-Bomb (HAS)",
+				"name": "A-Bomb (HAS)dasdasdad",
 				"description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
 				"modified": "2013-09-18T15:54:04-0400",
 				"thumbnail": {

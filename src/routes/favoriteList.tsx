@@ -4,11 +4,10 @@ import { Outlet } from "react-router-dom";
 
 export default function FavoriteList() {
 	const { likedCards, removeLike } = useLikes();
-	console.log("🚀 ~ FavoriteList ~ likedCards:", likedCards);
 	return (
-		<div>
+		<section className="section">
 			<h1 style={{color: "var(--color_black)"}}>Favorite List</h1>
-			<section className="characterList">
+			<div className="characterList">
 				{likedCards.map((character) => (
 					<div className="characters" key={character.id}>
 						<img
@@ -41,7 +40,7 @@ export default function FavoriteList() {
 					</div>
 				))}
 				<Outlet />
-			</section>
-		</div>
+			</div>
+		</section>
 	);
 }
