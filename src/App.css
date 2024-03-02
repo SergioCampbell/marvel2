@@ -103,7 +103,7 @@
 .characterDetail {
   background: var(--color_black);
   color: var(--color_white);
-  padding: 0px 48px;
+  padding: 0px 295px;
   display: flex;
   align-items: center;
   position: relative;
@@ -125,11 +125,72 @@
 .characterInfo {
   display: grid;
   justify-items: center;
+  margin: 0 30px;
 }
 
 .comicsList {
   display: flex;
   flex-direction: column;
-  padding: 48px 0px;
+  padding: 48px 300px;
   gap: 24px;
+}
+
+.comics {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+  width: 97.5%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* For tablets */
+@media only screen and (max-width: 1024px) {
+  .characterDetail {
+    justify-content: space-between;
+    padding: 0 30px 0 0;
+  }
+
+  .characterInfo {
+    margin-left: 50px;
+  }
+
+  .comicsList {
+    padding: 48px 50px;
+  }
+}
+
+/* For mobile devices */
+@media only screen and (max-width: 768px) {
+  .characterDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .characterDetail::after {
+    width: 92.6%;
+  }
+
+  .characterInfo {
+    margin-left: 0;
+  }
+
+  .comicsList {
+    padding: 48px 5px;
+  }
+
+  .comics {
+    justify-content: flex-start;
+    width: auto;
+  }
+}
+
+.comicDisplay {
+  display: grid;
+  justify-items: center;
+  margin: 40px;
 }
