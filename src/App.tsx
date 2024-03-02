@@ -9,6 +9,7 @@ import { Result } from "./interfaces/characters.interface";
 import FavoriteList from "./routes/favoriteList";
 import CharacterDetails from "./routes/CharacterDetails";
 import getAllCharacters from "./services/getAllCharacters.service";
+import Loader from "./components/Lodaders";
 
 function App() {
 	const [search, setSearch] = useState<string>("");
@@ -20,7 +21,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		getAllCharacters().then((data) => {
+		getAllCharacters(search).then((data) => {
 			const results = data.filter((item: { name: string }) => item.name.toLowerCase().includes(search.toLowerCase()));
 			setSearchResults(results);
 		});
@@ -30,19 +31,22 @@ function App() {
 		<main test-id="App">
 			<Navbar likes={likedCards.length} />
 			<Routes>
-				<Route path="*" element={
+				<Route loader={() => <Loader />} path="*" element={
 					<>
-						<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
+						<Search handleSearch={handleSearch} searchResults={searchResults} />
 						<CharacterList searchResults={searchResults} />
 					</>
 				} />
-				<Route path="/favorites-list" element={
-					<>
-						<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
-						<FavoriteList />
-					</>
-				} />
 				<Route
+					loader={() => <Loader />}
+					path="/favorites-list" element={
+						<>
+							<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
+							<FavoriteList />
+						</>
+					} />
+				<Route
+					loader={() => <Loader />}
 					path="/character-details/:characterId"
 					element={<CharacterDetails />}
 				/>

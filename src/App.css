@@ -19,8 +19,9 @@
 }
 
 .search {
-  margin-top: 30px;
-  margin-bottom: 12px;
+  /* margin-top: 30px;
+  margin-bottom: 12px; */
+  margin: 50px;
 }
 
 .searchLine {
@@ -144,6 +145,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
+  scrollbar-color: var(--color_red) var(--color_gray);
+  scrollbar-width: thin;
 }
 
 /* For tablets */
@@ -164,6 +167,9 @@
 
 /* For mobile devices */
 @media only screen and (max-width: 768px) {
+  .characterList {
+    justify-content: center;
+  }
   .characterDetail {
     display: flex;
     flex-direction: column;
@@ -191,6 +197,13 @@
 
 .comicDisplay {
   display: grid;
-  justify-items: center;
-  margin: 40px;
+  margin: 10px;
+}
+
+.comicDisplayName {
+  margin: 5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

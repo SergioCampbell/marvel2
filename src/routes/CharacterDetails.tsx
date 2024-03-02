@@ -1,24 +1,22 @@
 import { useEffect, useState } from "react";
-// import getCharacterDetail from "../services/getCharacter.service";
-// import { useParams } from "react-router-dom";
+import getCharacterDetail from "../services/getCharacter.service";
+import { useParams } from "react-router-dom";
 import { Result } from "../interfaces/characters.interface";
-import { characterDetail } from "../utils/characterDetail";
 import { HeartIcon } from "../style/HeartIcon";
 import { UnselectedHeartIcon } from "../style/UnselectedHeartIcon";
 import ComicsList from "../components/items/ComicsList";
 
 export default function CharacterDetails({likes}: {likes?: number}) {
-	// const { characterId } = useParams();
+	const { characterId } = useParams();
 
 	const [character, setCharacter] = useState<Result>();
 
-	// const data = getCharacterDetail(characterId ? characterId : "");
+	const data = getCharacterDetail(characterId ? characterId : "");
 
 	useEffect(() => {
-		// data.then((data) => {
-		// 	setCharacter(data);
-		// });
-		return setCharacter(characterDetail.data.results[0]);
+		data.then((data) => {
+			setCharacter(data[0]);
+		});
 	}, []);
 
 	if (!character) {

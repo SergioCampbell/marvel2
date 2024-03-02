@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { ComicsT } from "../../interfaces/comic.interface";
 import useComicsDetail from "../../hooks/useComicsDetail";
-import { Comics, Result } from "../../interfaces/characters.interface";
+import { Comics } from "../../interfaces/characters.interface";
 import { useEffect, useState } from "react";
+import useComicDetailsList from "../../hooks/useSimplefied";
 
 interface ComicsListProps {
   comics: Comics;
 }
 
 export default function ComicsList({ comics }: ComicsListProps) {
-	const [comicDetails, setComicDetails] = useState<Result[]>([]);
+	const [comicDetails, setComicDetails] = useState<ComicsT>([]);
+
+	const simplifiedArray = useComicDetailsList(comicDetails);
 
 	useEffect(() => {
 		const fetchComicDetails = async () => {
@@ -30,13 +34,22 @@ export default function ComicsList({ comics }: ComicsListProps) {
 		<div className="comics">
 			{comics.items.map((comic, index) => (
 				<div key={comic.name} className="comicDisplay">
-					{comicDetails[index] && (
-						<img
-							src={`${comicDetails[index]?.thumbnail?.path}/standard_fantastic.${comicDetails[index]?.thumbnail?.extension}`}
-							alt={comicDetails[index].name}
-						/>
+					{simplifiedArray[index] && simplifiedArray[index].thumbnail && (
+						<>
+							<img
+								src={`${simplifiedArray[index]?.thumbnail?.path}/portrait_fantastic.${simplifiedArray[index]?.thumbnail?.extension}`}
+								alt={simplifiedArray[index].title}
+							/>
+							<p className="comicDisplayName">{comic.name}</p>
+							<p style={{fontSize: 12, margin: 0}}>
+								{simplifiedArray[index].dates.map(date => {
+									const formattedDate = new Date(date.date);
+									const year = formattedDate.getFullYear();
+									return year;
+								}).join(", ")}
+							</p>
+						</>
 					)}
-					<p>{comic.name}</p>
 				</div>
 			))}
 		</div>
