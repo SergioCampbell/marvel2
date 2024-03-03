@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "playwright test",
-    "codegen": "npx playwright codegen"
+    "codegen": "npx playwright codegen localhost:5173"
   },
   "dependencies": {
     "localforage": "^1.10.0",
