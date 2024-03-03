@@ -7,10 +7,11 @@ import { useState, useEffect } from "react";
 export default function useCharacters() {
 	const [search, setSearch] = useState<string>("");
 	const location = useLocation();
-	console.log("🚀 ~ useCharacters ~ search:", search);
   
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearch(e.target.value);
+		setTimeout(() => {
+			setSearch(e.target.value);
+		}, 2000);
 	};
 
 	const [searchResults, setSearchResults] = useState<Result[]>([]);
