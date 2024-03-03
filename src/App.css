@@ -26,8 +26,8 @@
 
 .searchLine {
   border: 1px solid var(--color_black);
-  marginTop: 5px;
-  marginBottom: 10px
+  margin-top: 5px;
+  margin-bottom: 10px
 }
 
 .searchInputContainer {
@@ -38,8 +38,8 @@
 
 .searchText {
   color: var(--color_black);
-  fontSize: 12px;
-  fontWeight: 600 
+  font-size: 12px;
+  font-weight: 600 
 }
 
 .searchInput {

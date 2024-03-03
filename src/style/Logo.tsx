@@ -1,5 +1,3 @@
-import React from "react";
-
 export const MarvelLogo = () => {
 	return (
 		<svg id="marvel-logo" width="130" height="52" viewBox="0 0 130 52" fill="none" xmlns="http://www.w3.org/2000/svg">
