@@ -25,43 +25,50 @@ export const Content = ({ searchResults }: SearchResultsProps) => {
 
 	return (
 		<section className="characterList">
-			{searchResults.map((character) => (
-				<div className="characters" key={character.id}>
-					<img
-						src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-						alt={character.name}
-						width={188}
-						height={189}
-						className="characterImage"
-					/>
-					<div className="characterName">
-						<Link to={`/character-details/${character.id}`}
-							style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
-							<p
-								style={{
-									fontSize: 12,
-									fontWeight: 600,
-									textOverflow: "ellipsis",
-									whiteSpace: "nowrap",
-									overflow: "hidden",
-								}}
+			{searchResults.length === 0 
+				?
+				<p style={{color: "var(--color_black)"}}>
+					No results found <br />
+					<i>Try again with another search</i>
+				</p>
+				:
+				searchResults.map((character) => (
+					<div className="characters" key={character.id}>
+						<img
+							src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+							alt={character.name}
+							width={188}
+							height={189}
+							className="characterImage"
+						/>
+						<div className="characterName">
+							<Link to={`/character-details/${character.id}`}
+								style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
+								<p
+									style={{
+										fontSize: 12,
+										fontWeight: 600,
+										textOverflow: "ellipsis",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+									}}
+								>
+									{character.name}
+								</p>
+							</Link>
+							<button
+								className="like"
+								onClick={() => handleLikeClick(character)}
 							>
-								{character.name}
-							</p>
-						</Link>
-						<button
-							className="like"
-							onClick={() => handleLikeClick(character)}
-						>
-							{isCharacterLiked(character) ? (
-								<HeartIcon width={12} />
-							) : (
-								<UnselectedHeartIcon width={12} />
-							)}
-						</button>
+								{isCharacterLiked(character) ? (
+									<HeartIcon width={12} />
+								) : (
+									<UnselectedHeartIcon width={12} />
+								)}
+							</button>
+						</div>
 					</div>
-				</div>
-			))}
+				))}
 		</section>
 	);
 };

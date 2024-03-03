@@ -3,29 +3,15 @@ import { useLikes } from "./context/globalStateContext";
 import Navbar from "./components/navigation/Navbar";
 import { Route, Routes } from "react-router-dom";
 import CharacterList from "./routes/characterList";
-import { useEffect, useState } from "react";
 import { Search } from "./components/navigation/Search";
-import { Result } from "./interfaces/characters.interface";
 import FavoriteList from "./routes/favoriteList";
 import CharacterDetails from "./routes/CharacterDetails";
-import getAllCharacters from "./services/getAllCharacters.service";
 import Loader from "./components/Lodaders";
+import useCharacters from "./hooks/useCharacters";
 
 function App() {
-	const [search, setSearch] = useState<string>("");
 	const { likedCards } = useLikes();
-
-	const [searchResults, setSearchResults] = useState<Result[]>([]);
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearch(e.target.value);
-	};
-
-	useEffect(() => {
-		getAllCharacters(search).then((data) => {
-			const results = data.filter((item: { name: string }) => item.name.toLowerCase().includes(search.toLowerCase()));
-			setSearchResults(results);
-		});
-	}, [search]);
+	const { handleSearch, searchResults } = useCharacters();
 
 	return (
 		<main test-id="App">
@@ -41,7 +27,7 @@ function App() {
 					loader={() => <Loader />}
 					path="/favorites-list" element={
 						<>
-							<Search handleSearch={handleSearch} search={search} searchResults={searchResults} />
+							<Search handleSearch={handleSearch} searchResults={searchResults} />
 							<FavoriteList />
 						</>
 					} />
