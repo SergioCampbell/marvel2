@@ -124,7 +124,7 @@ The project is organized as follows:
 
 ### If you want to use the application in "Production mode"
 
-  1. Go to [Marvel 2 app](https://sergiocampbell.com)
+  1. Go to [Marvel 2 app](https://marvel-swart-delta.vercel.app/)
   2. Start using.
 
 ### Running tests
