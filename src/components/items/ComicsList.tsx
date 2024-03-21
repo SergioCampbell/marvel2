@@ -3,7 +3,7 @@ import { ComicsT } from "../../interfaces/comic.interface";
 import useComicsDetail from "../../hooks/useComicsDetail";
 import { Comics } from "../../interfaces/characters.interface";
 import { useEffect, useState } from "react";
-import useComicDetailsList from "../../hooks/useSimplefied";
+import useComicDetailsList from "../../hooks/useSimplified";
 
 interface ComicsListProps {
   comics: Comics;

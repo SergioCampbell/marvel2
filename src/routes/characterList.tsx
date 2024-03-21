@@ -1,15 +1,15 @@
-import Loader from "../components/Lodaders";
+import useCharacters from "../hooks/useCharacters";
+import Loader from "../components/Loaders";
 import { Content } from "../components/items/Content";
-import { Result } from "../interfaces/characters.interface";
-interface SearchResultsProps {
-    searchResults: Result[];
-}
+import { Search } from "../components/navigation/Search";
 
-export default function CharacterList({searchResults}: SearchResultsProps) {
+export default function CharacterList() {
+	const { handleSearch, searchResults } = useCharacters();
 
 	return (
 		<section className="section">
-			{!searchResults ? <Loader /> : <Content searchResults={searchResults} />}
+			<Search handleSearch={handleSearch} searchResults={searchResults} />
+			{searchResults.length === 0 ? <Loader /> : <Content searchResults={searchResults} />}
 		</section>
 	);
 }

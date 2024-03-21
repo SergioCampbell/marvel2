@@ -2,6 +2,7 @@
 import { useLocation } from "react-router-dom";
 import { Result } from "../interfaces/characters.interface";
 import getAllCharacters from "../services/getAllCharacters.service";
+// import getAllCharacters from "../fakeData.json";
 import { useState, useEffect } from "react";
 
 export default function useCharacters() {
@@ -9,10 +10,20 @@ export default function useCharacters() {
 	const location = useLocation();
   
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setTimeout(() => {
-			setSearch(e.target.value);
-		}, 2000);
+		const searchValue = e.target.value;
+		setSearchValue(searchValue);
 	};
+
+	const [searchValue, setSearchValue] = useState<string>("");
+	
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setSearch(searchValue);
+		}, 800);
+	
+		return () => clearTimeout(timer);
+	}, [searchValue]);
+	
 
 	const [searchResults, setSearchResults] = useState<Result[]>([]);
 

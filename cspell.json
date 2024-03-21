@@ -1,0 +1,30 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "version": "0.2",
+    "cache": {"useCache": false},
+    "enabled": true,
+    "dictionaryDefinitions": [
+      {
+        "name": "dicctionary",
+        "path": "./dicctionary.txt"
+      }
+    ],
+    "dictionaries": [
+        "dicctionary"
+    ],
+    "ignorePaths": 
+    ["node_modules",
+    "/diccionary.txt",
+    "dist",
+    "build",
+    "public",
+    "tsconfig.json",
+    "tsconfig.node.json",
+    "package.json",
+    "pnpm-lock.yaml",
+    "playwright-report",
+    "README.md",
+    "public",
+    "assets",
+    "cspell.json"],
+  }

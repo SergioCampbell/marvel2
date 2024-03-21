@@ -42,7 +42,7 @@ The project is organized as follows:
 │   ├── 📁hooks
 │   │   ├── useCharacters.tsx
 │   │   ├── useComicsDetail.tsx
-│   │   └── useSimplefied.tsx
+│   │   └── useSimplified.tsx
 │   ├── index.css
 │   ├── 📁interfaces
 │   │   ├── cards.interface.ts

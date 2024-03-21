@@ -3,15 +3,12 @@ import { useLikes } from "./context/globalStateContext";
 import Navbar from "./components/navigation/Navbar";
 import { Route, Routes } from "react-router-dom";
 import CharacterList from "./routes/characterList";
-import { Search } from "./components/navigation/Search";
 import FavoriteList from "./routes/favoriteList";
 import CharacterDetails from "./routes/CharacterDetails";
-import Loader from "./components/Lodaders";
-import useCharacters from "./hooks/useCharacters";
+import Loader from "./components/Loaders";
 
 function App() {
 	const { likedCards } = useLikes();
-	const { handleSearch, searchResults } = useCharacters();
 
 	return (
 		<main test-id="App">
@@ -19,15 +16,13 @@ function App() {
 			<Routes>
 				<Route loader={() => <Loader />} path="*" element={
 					<>
-						<Search handleSearch={handleSearch} searchResults={searchResults} />
-						<CharacterList searchResults={searchResults} />
+						<CharacterList />
 					</>
 				} />
 				<Route
 					loader={() => <Loader />}
 					path="/favorites-list" element={
 						<>
-							<Search handleSearch={handleSearch} searchResults={searchResults} />
 							<FavoriteList />
 						</>
 					} />

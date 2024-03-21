@@ -1,11 +1,15 @@
+import { Search } from "../components/navigation/Search";
 import { useLikes } from "../context/globalStateContext";
 import { HeartIcon } from "../style/HeartIcon";
 import { Link, Outlet } from "react-router-dom";
+import useCharacters from "../hooks/useCharacters";
 
 export default function FavoriteList() {
 	const { likedCards, removeLike } = useLikes();
+	const { handleSearch, searchResults } = useCharacters();
 	return (
 		<section className="section">
+			<Search handleSearch={handleSearch} searchResults={searchResults} />
 			<h1 style={{color: "var(--color_black)"}}>Favorite List</h1>
 			<div className="characterList">
 				{likedCards.length === 0 ? 
