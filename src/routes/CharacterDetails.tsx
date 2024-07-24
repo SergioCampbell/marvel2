@@ -5,22 +5,50 @@ import { Result } from "../interfaces/characters.interface";
 import { HeartIcon } from "../style/HeartIcon";
 import { UnselectedHeartIcon } from "../style/UnselectedHeartIcon";
 import ComicsList from "../components/items/ComicsList";
+import { useLikes } from "../context/globalStateContext";
+import Loader from "../components/Loaders";
 
-export default function CharacterDetails({likes}: {likes?: number}) {
+export default function CharacterDetails() {
 	const { characterId } = useParams();
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const { likedCards, addLike, removeLike } = useLikes();
+
+	const isCharacterLiked = (character: Result) => {
+		return likedCards.includes(character);
+	};
+
+	const handleLikeClick = (character: Result) => {
+		if (isCharacterLiked(character)) {
+			removeLike(character);
+		} else {
+			addLike(character);
+		}
+	};
 
 	const [character, setCharacter] = useState<Result>();
 
 	const data = getCharacterDetail(characterId ? characterId : "");
 
 	useEffect(() => {
-		data.then((data) => {
-			setCharacter(data[0]);
+		setIsLoading(true);
+		data.then((innerData) => {
+			setCharacter(innerData[0]);
+			setIsLoading(false);
 		});
 	}, []);
 
+	if (isLoading) {
+		return (
+			<>
+				<Loader />
+				<p>Loading character details...</p>
+			</>
+		);
+	}
+
 	if (!character) {
-		return <div>Loading...</div>;
+		return <p style={{ color: "var(--color_black)" }}>No character found</p>;
 	}
 
 	return (
@@ -28,15 +56,24 @@ export default function CharacterDetails({likes}: {likes?: number}) {
 			<header className="characterDetail">
 				<img src={`${character.thumbnail?.path}/standard_fantastic.${character.thumbnail?.extension}`} />
 				<div className="characterInfo">
-					<div style={{display: "flex", alignItems: "center", marginLeft: 30}}>
-						<h1 style={{marginRight: 30}}>{character.name}</h1>
-						{likes !== 0 ? (<><HeartIcon /> {likes}</>) : <UnselectedHeartIcon />}
+					<div className="characterHeader">
+						<h1>{character.name.toUpperCase()}</h1>
+						<button
+							className="like"
+							onClick={() => handleLikeClick(character)}
+						>
+							{isCharacterLiked(character) ? (
+								<HeartIcon />
+							) : (
+								<UnselectedHeartIcon />
+							)}
+						</button>
 					</div>
-					<p style={{margin: 20}}>{character.description || "No description"}</p>
+					<p style={{ margin: 20 }}>{character.description || "No description available for this character"}</p>
 				</div>
 			</header>
 			<article className="comicsList">
-				<h2 style={{color: "var(--color_black)", fontSize: 32}}>Comics</h2>
+				<h2 style={{ color: "var(--color_black)", fontSize: 32 }}>Comics</h2>
 				<ComicsList comics={character.comics} />
 			</article>
 		</div>

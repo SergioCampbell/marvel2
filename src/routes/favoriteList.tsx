@@ -1,12 +1,23 @@
 import { Search } from "../components/navigation/Search";
 import { useLikes } from "../context/globalStateContext";
-import { HeartIcon } from "../style/HeartIcon";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useCharacters from "../hooks/useCharacters";
+import CardContent from "../components/items/CardContent";
+import { Result } from "../interfaces/characters.interface";
 
 export default function FavoriteList() {
 	const { likedCards, removeLike } = useLikes();
 	const { handleSearch, searchResults } = useCharacters();
+
+	const isCharacterLiked = (character: Result) => {
+		return likedCards.includes(character);
+	};
+
+	const handleLikeClick = (character: Result) => {
+		if (isCharacterLiked(character)) {
+			removeLike(character);
+		}
+	};
 	return (
 		<section className="section">
 			<Search handleSearch={handleSearch} searchResults={searchResults} />
@@ -18,38 +29,12 @@ export default function FavoriteList() {
 					</p> 
 					: 
 					likedCards.map((character) => (
-						<div className="characters" key={character.id}>
-							<img
-								src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-								alt={character.name}
-								width={188}
-								height={189}
-								className="characterImage"
-							/>
-							<div className="characterName">
-								<Link to={`/character-details/${character.id}`}
-									style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
-									<p
-										style={{
-											fontSize: 12,
-											fontWeight: 600,
-											textOverflow: "ellipsis",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-										}}
-									>
-										{character.name}
-									</p>
-								</Link>
-								<button
-									className="like"
-									onClick={() => removeLike(character)}
-								>
-									<HeartIcon width={12} />
-								
-								</button>
-							</div>
-						</div>
+						<CardContent
+							key={character.id}
+							character={character}
+							handleLikeClick={handleLikeClick}
+							isCharacterLiked={isCharacterLiked}
+						/>
 					))}
 				<Outlet />
 			</div>

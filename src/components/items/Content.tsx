@@ -1,14 +1,14 @@
+import { useEffect } from "react";
 import { useLikes } from "../../context/globalStateContext";
-import { HeartIcon } from "../../style/HeartIcon";
-import { UnselectedHeartIcon } from "../../style/UnselectedHeartIcon";
 import { Result } from "../../interfaces/characters.interface";
-import { Link } from "react-router-dom";
+import CardContent from "./CardContent";
 
 type SearchResultsProps = {
 	searchResults: Result[];
+	isLoading: boolean;
 };
 
-export const Content = ({ searchResults }: SearchResultsProps) => {
+export const Content = ({ searchResults, isLoading }: SearchResultsProps) => {
 	const { likedCards, addLike, removeLike } = useLikes();
 
 	const isCharacterLiked = (character: Result) => {
@@ -23,51 +23,31 @@ export const Content = ({ searchResults }: SearchResultsProps) => {
 		}
 	};
 
+	useEffect(() => {
+		
+	}, [searchResults]);
+
+	if (isLoading) {
+		return <p style={{ color: "var(--color_black)" }}>Loading character list...</p>;
+	}
+
+	if (searchResults.length === 0) {
+		<p style={{ color: "var(--color_black)" }}>
+					No results found <br />
+			<i>Try again with another search</i>
+		</p>;
+	}
+
 	return (
 		<section className="characterList">
-			{searchResults.length === 0 
-				?
-				<p style={{color: "var(--color_black)"}}>
-					No results found <br />
-					<i>Try again with another search</i>
-				</p>
-				:
+			{
 				searchResults.map((character) => (
-					<div className="characters" key={character.id}>
-						<img
-							src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-							alt={character.name}
-							width={188}
-							height={189}
-							className="characterImage"
-						/>
-						<div className="characterName">
-							<Link to={`/character-details/${character.id}`}
-								style={{display: "flex", alignItems: "center", textDecoration: "none", color: "var(--color_white)"}}>
-								<p
-									style={{
-										fontSize: 12,
-										fontWeight: 600,
-										textOverflow: "ellipsis",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-									}}
-								>
-									{character.name}
-								</p>
-							</Link>
-							<button
-								className="like"
-								onClick={() => handleLikeClick(character)}
-							>
-								{isCharacterLiked(character) ? (
-									<HeartIcon width={12} />
-								) : (
-									<UnselectedHeartIcon width={12} />
-								)}
-							</button>
-						</div>
-					</div>
+					<CardContent
+						key={character.id}
+						character={character}
+						handleLikeClick={handleLikeClick}
+						isCharacterLiked={isCharacterLiked}
+					/>
 				))}
 		</section>
 	);
