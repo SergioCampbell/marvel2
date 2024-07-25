@@ -16,6 +16,7 @@
 
 .section {
   padding: 0px 48px;
+  margin-bottom: 10px;
 }
 
 .search {
@@ -63,6 +64,7 @@
   align-items: center;
   margin-top: 2px;
   margin-bottom: 10px;
+  max-width: 187px;
 }
 
 .characterHeader {
@@ -72,7 +74,7 @@
 }
 
 .characterImage {
-  margin-top: 20;
+  width: 100%;
   border-bottom: 10px solid;
   border-bottom-color: var(--color_red)
 }
@@ -177,6 +179,13 @@
 @media only screen and (max-width: 768px) {
   .section {
     padding: 0px 8px;
+  }
+
+  .characters {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 47%;
   }
 
   .characterDetail {

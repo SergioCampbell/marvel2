@@ -130,8 +130,10 @@ The project is organized as follows:
 ### Running tests
 
 1. Open a second terminal and run the `npm dev` or `pnpm dev` command *(this is required to run the all the tests)*,
-2. Run tests using `npm test` *(this runs a terminal script then generate a report)*.
+2. After you were ran the previous comand open other terminal tab and run the follow tests using `npm test` *(this runs a terminal script then generate a report)*.
 3. Access Playwright test reports in `playwright-report/` directory.
+
+Note: If after finishing the test does not redirect you to the report page, please type this command in the terminal: `pnpm exec playwright show-report`
 
 ### Author
 
